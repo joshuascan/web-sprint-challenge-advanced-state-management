@@ -11,6 +11,12 @@ export const initialState = {
   isLoading: false,
   error: "",
   errorMessage: "",
+  emptyFormValues: {
+    name: "",
+    position: "",
+    nickname: "",
+    description: "",
+  },
 };
 
 const reducer = (state = initialState, action) => {

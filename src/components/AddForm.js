@@ -4,14 +4,9 @@ import { connect } from "react-redux";
 import { addSmurf, setError } from "../actions";
 
 const AddForm = (props) => {
-  const { errorMessage } = props;
+  const { errorMessage, initialState } = props;
 
-  const [state, setState] = useState({
-    name: "",
-    position: "",
-    nickname: "",
-    description: "",
-  });
+  const [state, setState] = useState(initialState);
 
   const handleChange = (e) => {
     setState({
@@ -27,6 +22,7 @@ const AddForm = (props) => {
     } else {
       props.addSmurf(state);
       props.setError("");
+      setState(initialState);
     }
   };
 
@@ -92,6 +88,7 @@ const AddForm = (props) => {
 const mapStateToProps = (state) => {
   return {
     errorMessage: state.errorMessage,
+    initialState: state.emptyFormValues,
   };
 };
 
