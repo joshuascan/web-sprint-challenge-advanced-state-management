@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
 
 import { fetchSmurfs } from "../actions";
 
@@ -9,6 +10,10 @@ const AddForm = (props) => {
     nickname: "",
     description: "",
   });
+
+  useEffect(() => {
+    props.dispatch(fetchSmurfs());
+  }, []);
 
   const handleChange = (e) => {
     setState({
@@ -85,7 +90,15 @@ const AddForm = (props) => {
   );
 };
 
-export default AddForm;
+const mapStateToProps = (state) => {
+  return {
+    smurfs: state.smurfs,
+    isLoading: state.isLoading,
+    error: state.error,
+  };
+};
+
+export default connect(mapStateToProps)(AddForm);
 
 //Task List:
 //1. Connect the errorMessage, setError and addSmurf actions to the AddForm component.
