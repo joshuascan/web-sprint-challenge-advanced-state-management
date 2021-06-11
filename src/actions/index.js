@@ -3,14 +3,20 @@ import axios from "axios";
 export const FETCH_START = "FETCH_START";
 export const FETCH_SUCCESS = "FETCH_SUCCESS";
 export const FETCH_FAIL = "FETCH_FAIL";
+export const ADD_SMURF = "ADD_SMURF";
+export const SET_ERROR = "SET_ERROR";
 
 export const fetchSmurfs = () => {
   return (dispatch) => {
     dispatch(fetchStart());
-    axios.get("http://localhost:3333/smurfs").then((resp) => {
-      dispatch(fetchSuccess(resp));
-      console.log(resp);
-    });
+    axios
+      .get("http://localhost:3333/smurfs")
+      .then((resp) => {
+        dispatch(fetchSuccess(resp.data));
+      })
+      .catch((err) => {
+        dispatch(fetchFail(err));
+      });
   };
 };
 
@@ -18,12 +24,20 @@ export const fetchStart = () => {
   return { type: FETCH_START };
 };
 
-export const fetchSuccess = () => {
-  return { type: FETCH_SUCCESS };
+export const fetchSuccess = (smurfs) => {
+  return { type: FETCH_SUCCESS, payload: smurfs };
 };
 
-export const fetchFail = () => {
-  return { type: FETCH_FAIL };
+export const fetchFail = (error) => {
+  return { type: FETCH_FAIL, payload: error };
+};
+
+export const addSmurf = (smurf) => {
+  return { type: ADD_SMURF, payload: smurf };
+};
+
+export const setError = (error) => {
+  return { type: SET_ERROR, payload: error };
 };
 
 //Task List:
