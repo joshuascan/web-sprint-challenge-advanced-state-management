@@ -11,9 +11,9 @@ const AddForm = (props) => {
     description: "",
   });
 
-  useEffect(() => {
-    props.dispatch(fetchSmurfs());
-  }, []);
+  //   useEffect(() => {
+  //     props.dispatch(fetchSmurfs());
+  //   }, []);
 
   const handleChange = (e) => {
     setState({
