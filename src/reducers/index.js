@@ -10,6 +10,7 @@ export const initialState = {
   smurfs: [],
   isLoading: false,
   error: "",
+  errorMessage: "",
 };
 
 const reducer = (state = initialState, action) => {
@@ -34,12 +35,12 @@ const reducer = (state = initialState, action) => {
     case ADD_SMURF:
       return {
         ...state,
-        smurfs: [...state, { ...action.payload, id: Date.now() }],
+        smurfs: [...state.smurfs, { ...action.payload, id: Date.now() }],
       };
     case SET_ERROR:
       return {
         ...state,
-        error: action.payload,
+        errorMessage: action.payload,
       };
     default:
       return state;
